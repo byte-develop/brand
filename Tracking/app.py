@@ -7,7 +7,6 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Конфигурация через переменные окружения
 DB_USER = 'postgres'
 DB_PASSWORD = 'Saa40022'
 DB_HOST = '185.209.21.97'
@@ -81,10 +80,8 @@ def get_top6():
     result = []
     
     for path, views in stats:
-        # Поиск совпадения в словаре
         display_name = path_mapping.get(path, path)
         
-        # Обработка динамических путей
         if '/shop/:id' in display_name:
             display_name = display_name.replace('{id}', path.split('/')[-1])
         if '/profile/:id' in display_name:
