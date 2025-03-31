@@ -1,0 +1,27 @@
+.shop:hover{
+    transform: scale(1.1);
+    transition: all .3s;
+}
+
+.custom-pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: lightgray;
+    margin: 0 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: #0035EF;
+    opacity: 26%;
+}
+
+.pagination-dot.active {
+    background-color: #0035EF;
+    opacity: 100%;
+}

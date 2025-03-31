@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    background: #000000;
+    color: white;
+    overflow-x: hidden;
+}
+
+@font-face {
+    font-family: 'OB';
+    src: url('./Fonts/OpenSans-Bold.ttf');
+  }
+
+@font-face {
+font-family: 'OEB';
+src: url('./Fonts/OpenSans-ExtraBold.ttf');
+}
+
+@font-face {
+  font-family: 'OLB';
+  src: url('./Fonts/OLB.ttf');
+  }
+
+@font-face {
+  font-family: "IJ";
+  src: url('./Fonts/Adventure_Indiana_Jones.ttf')
+}
+
+.container {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  border: white solid 5px;
+  opacity: 0; /* Start as transparent */
+  animation: fadeIn 3s forwards; /* Apply the fadeIn animation */
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0; /* Start with opacity 0 */
+  }
+  to {
+      opacity: 1; /* End with opacity 1 */
+  }
+}
+  
+  .item {
+    width: 56%;
+    overflow: visible;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  
+
+
+@font-face {
+    font-family: 'OL';
+    src: url('./Fonts/OpenSans-Light.ttf');
+    }
+
+@font-face {
+    font-family: 'OM';
+    src: url('./Fonts/OpenSans-Medium.ttf');
+    }
+
+@font-face {
+    font-family: 'OR';
+    src: url('./Fonts/OpenSans-Regular.ttf');
+    }
+
+@font-face {
+    font-family: 'OSB';
+    src: url('./Fonts/OpenSans-SemiBold.ttf');
+    }
+
+    @font-face {
+      font-family: 'OEB';
+      src: url('./Fonts/OpenSans-ExtraBold.ttf');
+      }
+
+@font-face {
+  font-family: 'LZ';
+  src: url('./Fonts/Lozung Caps Black.otf');
+  }
+
+  @font-face {
+    font-family: 'PR';
+    src: url('./Fonts/pudelinka.ttf');
+    }
+
+  .hover-effect {
+      transition: box-shadow 0.3s ease;
+  }
+
+  .hover-effect:hover {
+      box-shadow: 0 0px 50px rgba(0, 51, 255, 0.8);
+  }
+  

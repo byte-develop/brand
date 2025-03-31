@@ -1,0 +1,52 @@
+select:focus {
+    outline: none; /* Убираем обводку при нажатии */
+}
+
+
+.float1:hover{
+    transform: translateY(-10px);
+    transition: .5s;
+    filter: drop-shadow(0 0 20px rgba(79,118,12,1));
+}
+
+.float2:hover{
+    transform: translateY(-10px);
+    transition: .5s;
+    filter: drop-shadow(0 0 20px rgba(15,92,112,1));
+}
+
+.float3:hover{
+    transform: translateY(-10px);
+    transition: .5s;
+    filter: drop-shadow(0 0 20px rgba(188, 84, 170, 1));
+}
+
+.float4:hover{
+    transform: translateY(-10px);
+    transition: .5s;
+    filter: drop-shadow(0 0 20px rgba(82,175,114,1));
+}
+
+.float5:hover{
+    transform: translateY(-10px);
+    transition: .5s;
+    filter: drop-shadow(0 0 20px rgba(212,1,249,1));
+}
+
+.float6:hover{
+    transform: translateY(-10px);
+    transition: .5s;
+    filter: drop-shadow(0 0 20px rgba(0,9,0,1));
+}
+
+.float7:hover{
+    transform: translateY(-10px);
+    transition: .5s;
+    filter: drop-shadow(0 0 20px rgba(112,23,91,1));
+}
+
+.float8:hover{
+    transform: translateY(-10px) translateX(250px);
+    transition: .5s;
+    filter: drop-shadow(0 0 15px rgba(92,183,203,1));
+}

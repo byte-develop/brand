@@ -1,0 +1,29 @@
+@keyframes slideAnimation {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-15850px);
+    }
+
+}
+
+.animation {
+    animation: slideAnimation 5s ease-in-out forwards;
+}
+
+@keyframes slideAnimation2 {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-8620px);
+    }
+
+}
+
+.animation2 {
+    animation: slideAnimation2 5s ease-in-out forwards;
+}

@@ -1,0 +1,13 @@
+
+.brand_elem:hover{
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,61,217,1) 24%, rgba(0,0,0,1) 78%);
+}
+
+.pr{
+    margin-top: 30px;
+    width: 90%;
+    border-radius: 40px;
+    backdrop-filter: blur(80.66666412353516px);
+    box-shadow: inset -40px 40px 40px 0 rgba(255, 255, 255, 0.1), inset 40px -40px 40px 0 rgba(165, 165, 165, 0.1);
+    background: rgba(0, 66, 234, 0.1);
+}

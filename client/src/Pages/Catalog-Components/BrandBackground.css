@@ -1,0 +1,28 @@
+/* BrandBackground.css */
+
+@keyframes marquee-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 15s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 15s linear infinite;
+}
+
+.flex {
+  display: flex;
+  white-space: nowrap; /* Предотвращает перенос строк */
+}
+
+.absolute {
+  position: absolute;
+}
