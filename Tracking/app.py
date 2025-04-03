@@ -7,7 +7,6 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Конфигурация через переменные окружения
 DB_USER = 'postgres'
 DB_PASSWORD = 'Saa40022'
 DB_HOST = '185.209.21.97'
@@ -24,6 +23,16 @@ class PageView(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     path = db.Column(db.String(255), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+class Visit(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, default=db.func.current_timestamp())
+    user_id = db.Column(db.String(100), nullable=True)  
+    day_of_week = db.Column(db.Integer)  
+    hour = db.Column(db.Integer)  
+
+    def __repr__(self):
+        return f"Visit('{self.date}', '{self.user_id}')"
 
 @app.route('/tracking/track', methods=['POST'])
 def track_pageview():
@@ -81,10 +90,8 @@ def get_top6():
     result = []
     
     for path, views in stats:
-        # Поиск совпадения в словаре
         display_name = path_mapping.get(path, path)
         
-        # Обработка динамических путей
         if '/shop/:id' in display_name:
             display_name = display_name.replace('{id}', path.split('/')[-1])
         if '/profile/:id' in display_name:
@@ -99,9 +106,42 @@ def get_top6():
     
     return jsonify(result)
 
+@app.route('/tracking/register_visit', methods=['POST'])
+def register_visit():
+    data = request.json
+    user_id = data.get('user_id')  
+    
+    existing_visit = Visit.query.filter_by(user_id=user_id, date=datetime.now().date()).first()
+    
+    if not existing_visit:
+        new_visit = Visit(user_id=user_id, day_of_week=datetime.now().weekday(), hour=datetime.now().hour)
+        db.session.add(new_visit)
+        db.session.commit()
+        return jsonify({'message': 'Visit registered successfully'}), 200
+    else:
+        return jsonify({'message': 'Visit already registered for today'}), 400
+
+@app.route('/tracking/get_visits_stats', methods=['GET'])
+def get_visits_stats():
+    total_visits = Visit.query.count()
+    unique_visits = len(set([v.user_id for v in Visit.query.all()]))
+    
+    visits_by_day_of_week = {}
+    for i in range(7):
+        visits_by_day_of_week[i] = Visit.query.filter_by(day_of_week=i).count()
+        
+    visits_by_hour = {}
+    for i in range(24):
+        visits_by_hour[i] = Visit.query.filter_by(hour=i).count()
+        
+    return jsonify({
+        'total_visits': total_visits,
+        'unique_visits': unique_visits,
+        'visits_by_day_of_week': visits_by_day_of_week,
+        'visits_by_hour': visits_by_hour
+    })
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(host='0.0.0.0', port=3002, debug=True)
-

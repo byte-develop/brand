@@ -29,6 +29,8 @@ import Miner from './Pages/Miner'
 import Crash from './Pages/Crash'
 import Statistic from './Pages/Statistic'
 import { trackPageView } from './api';
+import { nanoid } from 'nanoid';
+import axios from 'axios'
 
 function App() {
 
@@ -74,6 +76,25 @@ function App() {
     trackPageView(location.pathname);
   }, [location.pathname]);
 
+  const [stats, setStats] = useState({});
+
+  useEffect(() => {
+    let userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      userId = nanoid();
+      localStorage.setItem('userId', userId);
+    }
+
+    axios.post('http://localhost:3002/tracking/register_visit', { user_id: userId })
+      .then(response => console.log(response.data))
+      .catch(error => console.error(error));
+
+    axios.get('http://localhost:3002/tracking/get_visits_stats')
+      .then(response => setStats(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
   return (
     <div className="font-[OR]">
       <Header />
@@ -103,7 +124,25 @@ function App() {
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       )}
+      <div>
+        <h2>Статистика посещений</h2>
+        <p>Всего посещений: {stats.total_visits}</p>
+        <p>Уникальных посещений: {stats.unique_visits}</p>
+        <h3>Посещения по дням недели:</h3>
+        {Object.keys(stats.visits_by_day_of_week || {}).map(day => (
+          <p key={day}>{getDayOfWeek(day)}: {stats.visits_by_day_of_week?.[day]}</p>
+        ))}
+        <h3>Посещения по часам:</h3>
+        {Object.keys(stats.visits_by_hour || {}).map(hour => (
+          <p key={hour}>{hour}:00-{parseInt(hour) + 1}:00: {stats.visits_by_hour?.[hour]}</p>
+        ))}
+      </div>
     </div>
   );
+
+  function getDayOfWeek(day) {
+    const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+    return days[day];
+  }
 };
 export default App
